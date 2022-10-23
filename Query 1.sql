@@ -71,7 +71,7 @@ JOIN customer cus USING(customer_id)
 GROUP BY customer_id
 ORDER BY Total DESC;
 
-/* FILTRANDO OS VALORES COM HAVIG */
+/* FILTRANDO OS VALORES COM HAVING */
 SELECT
 	cus.customer_id AS ID,
 	cus.first_name AS Nome,
