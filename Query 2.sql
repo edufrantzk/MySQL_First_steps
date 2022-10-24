@@ -6,7 +6,7 @@ FROM payment pay
 WHERE amount > (SELECT AVG(amount) FROM payment)
 ORDER BY amount DESC;
 
-/*Puxando todas transações que tem o mesmo valor da maior transação do cliente 1 EXTRACTING ALL THE TRANSACTIONS WHICH HAS THE 
+/* EXTRACTING ALL THE TRANSACTIONS WHICH HAS THE 
 SAME VALUE AS THE CUSTOMER 1 BIGGEST TRANSACTION */
 SELECT *
 FROM payment
@@ -15,3 +15,25 @@ WHERE amount = (
     FROM payment
     WHERE customer_id = 1
     );
+    
+    
+/* IN */
+SELECT *
+FROM customer
+WHERE customer_id IN (
+	SELECT customer_id
+    FROM payment 
+    GROUP BY customer_id
+    HAVING COUNT(*)	> 35
+);
+
+
+/*ANY */
+SELECT *
+FROM customer 
+WHERE customer_id = ANY (
+	SELECT customer_id
+    FROM payment
+    GROUP BY customer_id
+    HAVING COUNT(*) > 35
+);
